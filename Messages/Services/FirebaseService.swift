@@ -60,10 +60,10 @@ class FirebaseService {
             for (key, value) in dic {
                 self.getImage(uid: key) { image in
                     result.append(SearchUserResult(uid: key, username: value["username"]!, image: image))
-                }
-                
-                if (result.count == dic.count) {
-                    completion(result)
+                    
+                    if (result.count == dic.count) {
+                        completion(result)
+                    }
                 }
             }
         }

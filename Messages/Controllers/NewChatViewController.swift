@@ -7,12 +7,16 @@ class NewChatViewController: UIViewController {
     
     private var searchedUsers: [SearchUserResult] = []
     private var filteredUsers: [SearchUserResult] {
-        guard let searchText = searchBar.text, !searchText.isEmpty else {
-            return searchedUsers
+        var users = searchedUsers
+        
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            users = searchedUsers.filter {
+                $0.username.localizedCaseInsensitiveContains(searchText)
+            }
         }
 
-        return searchedUsers.filter {
-            $0.username.localizedCaseInsensitiveContains(searchText)
+        return users.sorted {
+            $0.username < $1.username
         }
     }
     
@@ -72,7 +76,7 @@ extension NewChatViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        dismiss(animated: true) {
+        dismiss(animated: false) {
             self.completion?(self.filteredUsers[indexPath.row])
         }
     }
