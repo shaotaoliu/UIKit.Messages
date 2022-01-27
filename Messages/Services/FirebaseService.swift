@@ -90,4 +90,47 @@ class FirebaseService {
             completion(snapshot.value as? String ?? "Unknown")
         }
     }
+    
+    func storeMessage(user: UserViewModel, completion: @escaping (Error?) -> Void) {
+        auth.createUser(withEmail: user.email, password: user.password) { result, error in
+            if let error = error {
+                completion(error)
+                return
+            }
+            
+            let uid = result!.user.uid
+            
+            self.database.child("users").child(uid).setValue([
+                "username": user.name
+            ])
+            
+            if let image = user.image, let data = image.pngData() {
+                self.storage.child("images").child(uid).putData(data, metadata: nil)
+            }
+            
+            completion(nil)
+        }
+    }
+    
+    
+    
+    func storeMessage(senderUid: String, receiverUid: String, message: ChatMessage, completion: @escaping (Error?) -> Void) {
+        
+        database.child("messages").child("\(senderUid)\(receiverUid)").child("messages").setValue([
+            "text": message.text,
+            "sent": true,
+            "sentDt": Date().timeIntervalSince1970
+        ])
+        
+        database.child("messages").child("\(receiverUid)\(senderUid)").child("messages").setValue([
+            "text": message.text,
+            "sent": false,
+            "sentDt": Date().timeIntervalSince1970
+        ])
+    }
+
 }
+
+
+
+

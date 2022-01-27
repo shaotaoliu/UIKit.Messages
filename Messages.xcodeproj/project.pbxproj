@@ -18,6 +18,7 @@
 		4A20B36D27A1F02B00BBD24D /* SearchUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20B36B27A1F02B00BBD24D /* SearchUserTableViewCell.swift */; };
 		4A20B36E27A1F02B00BBD24D /* SearchUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A20B36C27A1F02B00BBD24D /* SearchUserTableViewCell.xib */; };
 		4A20B37027A20A7D00BBD24D /* Chatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20B36F27A20A7C00BBD24D /* Chatter.swift */; };
+		4A20B37527A21AF400BBD24D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20B37427A21AF400BBD24D /* Message.swift */; };
 		4AE0A77D279F2BCE0089B040 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0A77C279F2BCE0089B040 /* AppDelegate.swift */; };
 		4AE0A77F279F2BCE0089B040 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0A77E279F2BCE0089B040 /* SceneDelegate.swift */; };
 		4AE0A781279F2BCE0089B040 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0A780279F2BCE0089B040 /* ConversationsViewController.swift */; };
@@ -52,6 +53,7 @@
 		4A20B36B27A1F02B00BBD24D /* SearchUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserTableViewCell.swift; sourceTree = "<group>"; };
 		4A20B36C27A1F02B00BBD24D /* SearchUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUserTableViewCell.xib; sourceTree = "<group>"; };
 		4A20B36F27A20A7C00BBD24D /* Chatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatter.swift; sourceTree = "<group>"; };
+		4A20B37427A21AF400BBD24D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4AE0A779279F2BCE0089B040 /* Messages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messages.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE0A77C279F2BCE0089B040 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AE0A77E279F2BCE0089B040 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A20B37327A21ABD00BBD24D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4A20B36927A1EF2A00BBD24D /* SearchUserResult.swift */,
+				4A20B36F27A20A7C00BBD24D /* Chatter.swift */,
+				4A20B37427A21AF400BBD24D /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		4AE0A770279F2BCD0089B040 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +129,7 @@
 				4AE0A794279F2D050089B040 /* Views */,
 				4AE0A793279F2CF70089B040 /* Controllers */,
 				4AE0A795279F2D0E0089B040 /* View Models */,
+				4A20B37327A21ABD00BBD24D /* Models */,
 				4AE0A7AF279FC8320089B040 /* Services */,
 				4AE0A796279F2D190089B040 /* Helpers */,
 				4AE0A785279F2BD00089B040 /* Assets.xcassets */,
@@ -155,8 +168,6 @@
 			children = (
 				4AE0A7B7279FE5F50089B040 /* UserViewModel.swift */,
 				4A20B35327A0ABCF00BBD24D /* ConversationViewModel.swift */,
-				4A20B36927A1EF2A00BBD24D /* SearchUserResult.swift */,
-				4A20B36F27A20A7C00BBD24D /* Chatter.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -297,6 +308,7 @@
 				4A20B37027A20A7D00BBD24D /* Chatter.swift in Sources */,
 				4AE0A77F279F2BCE0089B040 /* SceneDelegate.swift in Sources */,
 				4AE0A7B8279FE5F50089B040 /* UserViewModel.swift in Sources */,
+				4A20B37527A21AF400BBD24D /* Message.swift in Sources */,
 				4A20B36427A1369800BBD24D /* ChatViewController.swift in Sources */,
 				4AE0A7B1279FC8570089B040 /* FirebaseService.swift in Sources */,
 			);

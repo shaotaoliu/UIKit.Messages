@@ -11,8 +11,9 @@ class ChatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = chatter.username
         loadMyData()
-        setupInputButton()
+        setupMessageInputBar()
     }
     
     private func loadMyData() {
@@ -22,38 +23,46 @@ class ChatViewController: MessagesViewController {
         }
     }
     
-    private func setupInputButton() {
-        let button = InputBarButtonItem()
-        button.setSize(CGSize(width: 35, height: 35), animated: false)
-        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
-        button.onTouchUpInside { [weak self] _ in
-            //self?.presentInputActionSheet()
-        }
-        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
-        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+    private func setupMessageInputBar() {
+//        let button = InputBarButtonItem()
+//        button.setSize(CGSize(width: 35, height: 35), animated: false)
+//        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+//
+//        button.onTouchUpInside { [weak self] _ in
+//            self?.presentInputActionSheet()
+//        }
+        
+//        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
+//        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+
+        messageInputBar.inputTextView.layer.backgroundColor = CGColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        messageInputBar.inputTextView.layer.cornerRadius = 5
+        messageInputBar.becomeFirstResponder()
     }
     
 //    private func presentInputActionSheet() {
-//        let actionSheet = UIAlertController(title: "Attach Media",
-//                                            message: "What would you like to attach?",
+//
+//        let actionSheet = UIAlertController(title: "Attach Image",
+//                                            message: "Please attach an image",
 //                                            preferredStyle: .actionSheet)
-//        actionSheet.addAction(UIAlertAction(title: "Photo", style: .default, handler: { [weak self] _ in
-//            self?.presentPhotoInputActionsheet()
-//        }))
-//        actionSheet.addAction(UIAlertAction(title: "Video", style: .default, handler: { [weak self]  _ in
-//            self?.presentVideoInputActionsheet()
-//        }))
-//        actionSheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: {  _ in
+//
+//        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
 //
 //        }))
-//        actionSheet.addAction(UIAlertAction(title: "Location", style: .default, handler: { [weak self]  _ in
-//            self?.presentLocationPicker()
+//
+//        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { [weak self] _ in
+//
 //        }))
+//
 //        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
 //        present(actionSheet, animated: true)
 //    }
-    
-    
-    
+//
+//    private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
+//        let picker = UIImagePickerController()
+//        picker.sourceType = sourceType
+//        picker.delegate = self
+//        picker.allowsEditing = true
+//        self.present(picker, animated: true)
+//    }
 }
