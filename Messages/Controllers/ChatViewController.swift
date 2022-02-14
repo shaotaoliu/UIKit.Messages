@@ -6,7 +6,6 @@ class ChatViewController: MessagesViewController {
     
     private var myImage: UIImage!
     var chatter: Chatter!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()

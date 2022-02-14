@@ -40,7 +40,7 @@ class NewChatViewController: UIViewController {
     
     private func loadData() {
         FirebaseService.shared.getAllUsers { result in
-            self.searchedUsers = result
+            self.searchedUsers = result.filter { $0.uid != FirebaseService.shared.currentUser?.uid }
             self.tableView.reloadData()
         }
     }
