@@ -18,6 +18,7 @@
 		4A20B36E27A1F02B00BBD24D /* SearchUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A20B36C27A1F02B00BBD24D /* SearchUserTableViewCell.xib */; };
 		4A20B37027A20A7D00BBD24D /* Chatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20B36F27A20A7C00BBD24D /* Chatter.swift */; };
 		4A20B37527A21AF400BBD24D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20B37427A21AF400BBD24D /* Message.swift */; };
+		4A28527227F11DBB00767A4F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28527127F11DBB00767A4F /* ProfileViewController.swift */; };
 		4A5354DD27BAF37600FD67BD /* LatestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5354DC27BAF37600FD67BD /* LatestMessage.swift */; };
 		4A7D3FA427EFE9B8004AF848 /* SentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7D3FA227EFE9B8004AF848 /* SentMessageCell.swift */; };
 		4A7D3FA827EFE9D2004AF848 /* ReceivedMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7D3FA627EFE9D2004AF848 /* ReceivedMessageCell.swift */; };
@@ -58,6 +59,7 @@
 		4A20B36C27A1F02B00BBD24D /* SearchUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUserTableViewCell.xib; sourceTree = "<group>"; };
 		4A20B36F27A20A7C00BBD24D /* Chatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatter.swift; sourceTree = "<group>"; };
 		4A20B37427A21AF400BBD24D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		4A28527127F11DBB00767A4F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4A5354DC27BAF37600FD67BD /* LatestMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestMessage.swift; sourceTree = "<group>"; };
 		4A7D3FA227EFE9B8004AF848 /* SentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessageCell.swift; sourceTree = "<group>"; };
 		4A7D3FA627EFE9D2004AF848 /* ReceivedMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedMessageCell.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				4A20B36627A1371D00BBD24D /* NewChatViewController.xib */,
 				4AE0A797279F2ED50089B040 /* LoginViewController.swift */,
 				4AE0A799279F2EEE0089B040 /* RegisterViewController.swift */,
+				4A28527127F11DBB00767A4F /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				4A7D3FA427EFE9B8004AF848 /* SentMessageCell.swift in Sources */,
 				4AE0A7A6279F4FF30089B040 /* ChatImageView.swift in Sources */,
 				4A20B35427A0ABCF00BBD24D /* ConversationViewModel.swift in Sources */,
+				4A28527227F11DBB00767A4F /* ProfileViewController.swift in Sources */,
 				4AE0A79A279F2EEE0089B040 /* RegisterViewController.swift in Sources */,
 				4A20B33127A0859600BBD24D /* ConversationTableViewCell.swift in Sources */,
 				4AE0A7A8279F50A20089B040 /* ChatEmailField.swift in Sources */,

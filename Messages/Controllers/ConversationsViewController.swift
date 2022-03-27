@@ -21,6 +21,13 @@ class ConversationsViewController: UIViewController {
         
         if FirebaseService.shared.currentUser == nil {
             gotoLoginScreen()
+            return
+        }
+        
+        vm.loadConversation {
+            DispatchQueue.main.async {
+                self.chatterTable.reloadData()
+            }
         }
     }
 
@@ -63,7 +70,13 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        let conv = vm.conversations[indexPath.row]
+        vc.chatter = Chatter(uid: conv.uid, username: conv.username!, image: conv.userImage)
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
