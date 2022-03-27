@@ -10,7 +10,7 @@ Register screen:
 
 ![image](https://user-images.githubusercontent.com/15805568/151277519-07daa15a-99a6-4208-8d33-0c48d23a1b38.png)
 
-Choose some to chat:
+Choose someone to chat:
 
 ![image](https://user-images.githubusercontent.com/15805568/151277278-2af4e721-d328-42eb-9cfd-af6e1d12f820.png)
 
