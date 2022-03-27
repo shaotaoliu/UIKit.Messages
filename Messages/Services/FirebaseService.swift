@@ -91,41 +91,47 @@ class FirebaseService {
         }
     }
     
-    func storeMessage(user: UserViewModel, completion: @escaping (Error?) -> Void) {
-        auth.createUser(withEmail: user.email, password: user.password) { result, error in
-            if let error = error {
-                completion(error)
-                return
+    func getMessages(senderUid: String, receiverUid: String, completion: @escaping ([ChatMessage]) -> Void) {
+        database.child("messages").child("\(senderUid)\(receiverUid)").child("messages").observe(.value, with: { snapshot in
+            var messages = [ChatMessage]()
+            if let dic = snapshot.value as? NSDictionary {
+                let id = dic["id"] as! String
+                let text = dic["text"] as! String
+                let sent = dic["sent"] as! Bool
+                let sentDt = dic["sentDt"] as! TimeInterval
+                
+                messages.append(ChatMessage(id: id, text: text, sent: sent, sentDate: Date(timeIntervalSince1970: sentDt)))
+                completion(messages)
             }
             
-            let uid = result!.user.uid
-            
-            self.database.child("users").child(uid).setValue([
-                "username": user.name
-            ])
-            
-            if let image = user.image, let data = image.pngData() {
-                self.storage.child("images").child(uid).putData(data, metadata: nil)
-            }
-            
-            completion(nil)
-        }
+            completion([])
+        })
     }
     
-    
-    
-    func storeMessage(senderUid: String, receiverUid: String, message: ChatMessage, completion: @escaping (Error?) -> Void) {
+    func storeMessage(senderUid: String, receiverUid: String, senderName: String, message: ChatMessage, completion: @escaping (Error?) -> Void) {
         
         database.child("messages").child("\(senderUid)\(receiverUid)").child("messages").setValue([
+            "id": message.id,
             "text": message.text,
             "sent": true,
-            "sentDt": Date().timeIntervalSince1970
+            "sentDt": message.sentDate.timeIntervalSince1970
         ])
         
         database.child("messages").child("\(receiverUid)\(senderUid)").child("messages").setValue([
+            "id": message.id,
             "text": message.text,
             "sent": false,
-            "sentDt": Date().timeIntervalSince1970
+            "sentDt": message.sentDate.timeIntervalSince1970
+        ])
+        
+        database.child("latestMessages").child(senderUid).setValue([
+            "text": message.text,
+            "sentDt": message.sentDate.timeIntervalSince1970
+        ])
+        
+        database.child("latestMessages").child(receiverUid).setValue([
+            "text": "\(senderName): \(message.text)",
+            "sentDt": message.sentDate.timeIntervalSince1970
         ])
     }
 

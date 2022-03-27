@@ -32,8 +32,9 @@ class ConversationsViewController: UIViewController {
     @objc private func compose() {
         let vc = NewChatViewController(nibName: "NewChatViewController", bundle: nil)
         vc.completion = { result in
-            let vc = ChatViewController()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
             vc.chatter = Chatter(uid: result.uid, username: result.username, image: result.image)
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

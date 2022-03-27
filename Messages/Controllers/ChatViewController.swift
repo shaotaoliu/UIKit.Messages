@@ -1,67 +1,93 @@
 import UIKit
-import MessageKit
-import InputBarAccessoryView
 
-class ChatViewController: MessagesViewController {
+class ChatViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageTextField: UITextField!
     
     private var myImage: UIImage!
+    private var messages = [ChatMessage]()
     var chatter: Chatter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = chatter.username
-        loadMyData()
-        setupMessageInputBar()
+
+        tableView.delegate = self
+        tableView.dataSource = self
+        messageTextField.delegate = self
+                
+        tableView.register(SentMessageCell.self, forCellReuseIdentifier: "SentMessageCell")
+        tableView.register(ReceivedMessageCell.self, forCellReuseIdentifier: "ReceivedMessageCell")
+        
+        loadMyPhoto()
     }
     
-    private func loadMyData() {
+    private func loadMyPhoto() {
         let uid = FirebaseService.shared.currentUser!.uid
         FirebaseService.shared.getImage(uid: uid) { image in
             self.myImage = image == nil ? UIImage(systemName: "person.fill") : image!
         }
     }
     
-    private func setupMessageInputBar() {
-//        let button = InputBarButtonItem()
-//        button.setSize(CGSize(width: 35, height: 35), animated: false)
-//        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        let uid = FirebaseService.shared.currentUser!.uid
+//        FirebaseService.shared.getMessages(senderUid: uid, receiverUid: chatter.uid) { messages in
+//            self.messages = messages
+//            
 //
-//        button.onTouchUpInside { [weak self] _ in
-//            self?.presentInputActionSheet()
 //        }
         
-//        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
-//        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
-
-        messageInputBar.inputTextView.layer.backgroundColor = CGColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        messageInputBar.inputTextView.layer.cornerRadius = 5
-        messageInputBar.becomeFirstResponder()
+        messageTextField.becomeFirstResponder()
     }
     
-//    private func presentInputActionSheet() {
-//
-//        let actionSheet = UIAlertController(title: "Attach Image",
-//                                            message: "Please attach an image",
-//                                            preferredStyle: .actionSheet)
-//
-//        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
-//
-//        }))
-//
-//        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { [weak self] _ in
-//
-//        }))
-//
-//        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        present(actionSheet, animated: true)
-//    }
-//
-//    private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
-//        let picker = UIImagePickerController()
-//        picker.sourceType = sourceType
-//        picker.delegate = self
-//        picker.allowsEditing = true
-//        self.present(picker, animated: true)
-//    }
+    var sent = true
+    @IBAction func sentButtonTapped(_ sender: Any) {
+        sendMessage()
+    }
+    
+    private func sendMessage() {
+        if let message = messageTextField.text, !message.isEmpty {
+            let cm = ChatMessage(id: UUID().uuidString, text: message, sent: sent, sentDate: Date())
+            messages.append(cm)
+            sent.toggle()
+            tableView.reloadData()
+            messageTextField.text = ""
+        }
+    }
+}
+
+extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = messages[indexPath.row]
+        
+        if message.sent {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SentMessageCell", for: indexPath) as! SentMessageCell
+            cell.setPhoto(image: myImage)
+            cell.setMessage(message: message)
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedMessageCell", for: indexPath) as! ReceivedMessageCell
+        cell.setPhoto(image: chatter.image)
+        cell.setMessage(message: message)
+        return cell
+    }
+    
+}
+
+extension ChatViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        sendMessage()
+        return true
+    }
 }
