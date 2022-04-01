@@ -6,6 +6,10 @@ class ChatMessageCell: UITableViewCell {
     var labelMessage = UILabel()
     var bgView = UIView()
     
+    var maskedCorners: CACornerMask? {
+        nil
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -15,6 +19,10 @@ class ChatMessageCell: UITableViewCell {
         
         photoView.layer.cornerRadius = 20
         photoView.layer.masksToBounds = true
+        
+        if let mc = maskedCorners {
+            bgView.layer.maskedCorners = mc
+        }
         
         bgView.layer.cornerRadius = 6
         bgView.backgroundColor = bgColor

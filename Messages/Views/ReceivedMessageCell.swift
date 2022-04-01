@@ -9,4 +9,12 @@ class ReceivedMessageCell: ChatMessageCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override var maskedCorners: CACornerMask? {
+        return [
+            .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner,
+            .layerMaxXMaxYCorner
+        ]
+    }
 }
